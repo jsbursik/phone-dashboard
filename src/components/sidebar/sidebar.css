@@ -1,0 +1,50 @@
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+
+	width: 220px;
+	height: 100vh;
+
+	padding: 1rem;
+
+	transition: all 0.3s ease;
+}
+
+.sidebar.closed {
+	width: 80px;
+}
+
+.menu {
+	position: absolute;
+	left: 220px;
+	padding-right: 12px;
+	border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.top {
+	margin-bottom: 1.5rem;
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+}
+
+ul li {
+	margin-block: 0.5rem;
+	padding: 1rem 2rem;
+	border-radius: 1.5rem;
+
+	align-items: center;
+
+	a {
+		display: flex;
+		align-items: center;
+	}
+
+	a span {
+		margin-left: 1rem;
+	}
+}
