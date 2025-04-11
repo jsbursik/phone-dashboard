@@ -1,37 +1,31 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
+	import ListItem from './list-item/list-item.svelte';
+	import Dropdown from './dropdown/dropdown.svelte';
 
 	import './sidebar.css';
 
-	let toggled = $state(false);
+	let toggleSidebar = $state(false);
 </script>
 
-<div class={`sidebar bg-stone-700 ${toggled ? 'closed' : ''}`}>
-	<div class="menu bg-stone-700 cursor-pointer" onclick={() => (toggled = !toggled)}>
-		<Icon icon="fa6-solid:bars" />
-	</div>
-	<div class="top text-xl font-bold flex justify-center">
-		<p>Phone Manager</p>
-	</div>
-	<div class="user"></div>
+<nav id="sidebar" class={toggleSidebar ? 'closed' : ''}>
 	<ul>
-		<li class="hover:bg-stone-800">
-			<a href="/">
-				<Icon icon="fa6-solid:house" class="inline" />
-				<span>Dashboard</span>
-			</a>
+		<li>
+			<span class="logo">Phone Manager</span>
+			<button
+				id="toggle-btn"
+				onclick={() => {
+					toggleSidebar = !toggleSidebar;
+				}}
+			>
+				<Icon icon="fa6-solid:bars" class="inline" />
+			</button>
 		</li>
-		<li class="hover:bg-stone-800">
-			<a href="/">
-				<Icon icon="fa6-solid:phone" class="inline" />
-				<span>Phones</span>
-			</a>
-		</li>
-		<li class="hover:bg-stone-800">
-			<a href="/">
-				<Icon icon="fa6-solid:gear" class="inline" />
-				<span>Config</span>
-			</a>
-		</li>
+		<ListItem href="/" icon="fa6-solid:house" name="Dashboard" />
+		<ListItem href="/phones" icon="fa6-solid:phone" name="Phones" />
+		<Dropdown icon="fa6-solid:gear" name="Settings">
+			<li><a href="#">Phone Profiles</a></li>
+			<li><a href="#">PM Settings</a></li>
+		</Dropdown>
 	</ul>
-</div>
+</nav>

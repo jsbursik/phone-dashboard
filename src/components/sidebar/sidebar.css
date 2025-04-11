@@ -1,50 +1,119 @@
-.sidebar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 99;
-
-	width: 220px;
+#sidebar {
 	height: 100vh;
+	width: 250px;
+	padding: 5px 1em;
+	background-color: var(--base-clr);
+	border-right: 1px solid var(--line-clr);
 
-	padding: 1rem;
+	position: sticky;
+	top: 0;
+	align-self: start;
 
-	transition: all 0.3s ease;
+	transition: 300ms ease-in-out;
+
+	overflow: hidden;
+	text-wrap: nowrap;
 }
 
-.sidebar.closed {
-	width: 80px;
+#sidebar svg:first-child {
+	width: 1.5em;
+	height: 1.5em;
 }
 
-.menu {
-	position: absolute;
-	left: 220px;
-	padding-right: 12px;
-	border-radius: 0 0.5rem 0.5rem 0;
+#sidebar.closed {
+	padding: 5px;
+	width: 60px;
 }
 
-.top {
-	margin-bottom: 1.5rem;
+#sidebar ul {
+	list-style: none;
 }
 
-ul {
+#sidebar > ul > li:first-child {
 	display: flex;
-	flex-direction: column;
+	justify-content: flex-end;
+	margin-bottom: 1rem;
+	.logo {
+		font-weight: bold;
+	}
 }
 
-ul li {
-	margin-block: 0.5rem;
-	padding: 1rem 2rem;
-	border-radius: 1.5rem;
+#toggle-btn {
+	display: grid;
+	place-items: center;
+}
 
+#sidebar ul li.active a {
+	color: var(--accent-clr);
+}
+
+#sidebar a,
+#sidebar .dropdown-btn,
+#sidebar .logo {
+	border-radius: 0.5em;
+	padding: 0.85em;
+	text-decoration: none;
+	color: var(--text-clr);
+	display: flex;
 	align-items: center;
+	gap: 1em;
+}
 
-	a {
-		display: flex;
-		align-items: center;
-	}
+.dropdown-btn {
+	width: 100%;
+	text-align: left;
+	background: none;
+	border: none;
+	font: inherit;
+	cursor: pointer;
+}
 
-	a span {
-		margin-left: 1rem;
+#sidebar svg {
+	flex-shrink: 0;
+}
+
+#sidebar a span,
+#sidebar .dropdown-btn span {
+	flex-grow: 1;
+}
+
+#sidebar a:hover,
+#sidebar .dropdown-btn:hover {
+	background-color: var(--line-clr);
+}
+
+#sidebar .sub-menu {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: 300ms ease-in-out;
+
+	> div {
+		overflow: hidden;
 	}
+}
+
+#sidebar .sub-menu.show {
+	grid-template-rows: 1fr;
+}
+
+.dropdown-btn svg {
+	transition: 300ms ease-in-out;
+}
+
+#sidebar .sub-menu a {
+	padding-left: 2em;
+}
+
+#toggle-btn {
+	margin-left: auto;
+	padding: 1em;
+	border: none;
+	border-radius: 0.5em;
+	background: none;
+	cursor: pointer;
+	color: var(--text-clr);
+}
+
+#toggle-btn:hover {
+	background-color: var(--line-clr);
 }

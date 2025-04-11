@@ -1,2 +1,53 @@
-@import 'tailwindcss';
-@plugin 'daisyui';
+:root {
+	--base-clr: #1e201e;
+	--line-clr: #3c3d37;
+	--hover-clr: #697565;
+	--text-clr: #ece8e0;
+	--secondary-text-clr: #ecdfcc;
+	--accent-clr: #5c9748;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-family:
+		Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+	font-weight: normal;
+	line-height: 1.5rem;
+}
+
+body {
+	min-height: 100vh;
+	min-height: 100dvh;
+	background-color: var(--base-clr);
+	color: var(--text-clr);
+
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+main {
+	padding: min(30px, 7%);
+}
+
+main p {
+	color: var(--secondary-text-clr);
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+
+.container {
+	border: 1px solid var(--line-clr);
+	border-radius: 1em;
+	margin-bottom: 1.2rem;
+	padding: min(3em, 15%);
+
+	h2,
+	p {
+		margin-top: 1em;
+	}
+}
