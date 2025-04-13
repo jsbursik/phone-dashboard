@@ -1,11 +1,13 @@
 :root {
-	--bg-color: #1f1e29;
-	--bg-color-secondary: #25242e;
-	--line-clr: #424150;
-	--hover-clr: #14141b;
-	--text-clr: #cdd1ca;
-	--secondary-text-clr: #b1b4af;
-	--accent-clr: #c99132;
+	--bg-clr: #22252b;
+	--bg-clr-secondary: #1b1e20;
+
+	--text-clr: #caced1;
+	--text-clr-secondary: #afb2b4;
+
+	--line-clr: #141618;
+	--hover-clr: #222527;
+	--accent-clr: #69a9fd;
 }
 
 * {
@@ -24,7 +26,7 @@ html {
 body {
 	min-height: 100vh;
 	min-height: 100dvh;
-	background-color: var(--bg-color-secondary);
+	background-color: var(--bg-clr-secondary);
 	color: var(--text-clr);
 
 	display: grid;
@@ -33,17 +35,18 @@ body {
 
 main {
 	padding: min(30px, 7%);
-	background-color: var(--bg-color);
+	background-color: var(--bg-clr);
 }
 
 main p {
-	color: var(--secondary-text-clr);
+	color: var(--text-clr-secondary);
 	margin-top: 5px;
 	margin-bottom: 15px;
 }
 
 .container {
-	background-color: var(--bg-color-secondary);
+	background-color: var(--bg-clr-secondary);
+	box-shadow: 0 2px 1em var(--bg-clr-secondary);
 
 	border: 1px solid var(--line-clr);
 	border-radius: 1em;
