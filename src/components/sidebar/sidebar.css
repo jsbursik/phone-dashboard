@@ -79,7 +79,7 @@
 
 #sidebar a:hover,
 #sidebar .dropdown-btn:hover {
-	background-color: var(--line-clr);
+	background-color: var(--hover-clr);
 }
 
 #sidebar .sub-menu {
@@ -115,5 +115,5 @@
 }
 
 #toggle-btn:hover {
-	background-color: var(--line-clr);
+	background-color: var(--hover-clr);
 }
