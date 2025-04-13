@@ -6,7 +6,7 @@
 
 	import './sidebar.css';
 
-	let sidebarClosed = false;
+	let sidebarClosed = true;
 
 	$: $sidebarState = sidebarClosed;
 
