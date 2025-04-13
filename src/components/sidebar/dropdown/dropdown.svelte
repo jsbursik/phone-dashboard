@@ -1,29 +1,3 @@
-<!--
-		<li>
-			<button
-				class="dropdown-btn"
-				onclick={() => {
-					toggleSubMenu = !toggleSubMenu;
-					toggleSubMenu ? (toggleSidebar = false) : '';
-				}}
-			>
-				<Icon icon="fa6-solid:gear" class="inline" />
-				<span>Config</span>
-				<Icon
-					icon="fa6-solid:chevron-up"
-					class="inline"
-					style={toggleSubMenu ? `` : `rotate: 180deg`}
-				/>
-			</button>
-			<ul class={`sub-menu ${toggleSubMenu ? 'show' : ''}`}>
-				<div>
-					<li><a href="#">Phone Profiles</a></li>
-					<li><a href="#">PM Settings</a></li>
-				</div>
-			</ul>
-		</li>
--->
-
 <script lang="ts">
 	type DropdownProps = {
 		icon: string;
@@ -44,8 +18,8 @@
 			toggleDropdown = !toggleDropdown;
 		}}
 	>
-		<Icon icon="fa6-solid:gear" class="inline" />
-		<span>Config</span>
+		<Icon icon={props.icon} class="inline" />
+		<span>{props.name}</span>
 		<Icon
 			icon="fa6-solid:chevron-up"
 			class="inline"
