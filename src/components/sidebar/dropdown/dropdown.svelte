@@ -1,23 +1,33 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	import Icon from '@iconify/svelte';
+	import { sidebarState } from '../sidebar.store';
+
 	type DropdownProps = {
 		icon: string;
 		name: string;
 		children: () => any;
 	};
 
-	import Icon from '@iconify/svelte';
+	const dispatch = createEventDispatcher();
 
 	let props: DropdownProps = $props();
 	let toggleDropdown = $state(false);
+
+	$effect(() => {
+		if ($sidebarState) {
+			toggleDropdown = false;
+		}
+	});
+
+	function handleToggle() {
+		toggleDropdown = !toggleDropdown;
+		dispatch('toggle', { isOpen: toggleDropdown });
+	}
 </script>
 
 <li>
-	<button
-		class="dropdown-btn"
-		onclick={() => {
-			toggleDropdown = !toggleDropdown;
-		}}
-	>
+	<button class="dropdown-btn" onclick={handleToggle}>
 		<Icon icon={props.icon} class="inline" />
 		<span>{props.name}</span>
 		<Icon
