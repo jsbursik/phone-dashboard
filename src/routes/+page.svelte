@@ -1,9 +1,3 @@
-<script lang="ts">
-	import { page } from '$app/state';
-
-	console.log(page.url.pathname);
-</script>
-
 <div class="container">
 	<h2>Hello World!</h2>
 	<p>
