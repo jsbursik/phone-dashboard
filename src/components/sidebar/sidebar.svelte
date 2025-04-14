@@ -33,8 +33,8 @@
 		<ListItem href="/" icon="fa6-solid:house" name="Dashboard" />
 		<ListItem href="/phones" icon="fa6-solid:phone" name="Phones" />
 		<Dropdown icon="fa6-solid:gear" name="Settings" on:toggle={handleDropdown}>
-			<li><a href="#">Phone Profiles</a></li>
-			<li><a href="#">PM Settings</a></li>
+			<li><a href="/settings/phones">Phone Profiles</a></li>
+			<li><a href="/settings/manager">PM Settings</a></li>
 		</Dropdown>
 	</ul>
 </nav>
