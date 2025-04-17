@@ -1,0 +1,21 @@
+.table-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 2rem;
+	aspect-ratio: 1/1;
+	padding: 0.5rem;
+	transform: translateY(2px);
+
+	border: 1px solid var(--bg-clr);
+	border-radius: 12px;
+}
+
+td > button:first-child {
+	background-color: var(--success-clr);
+}
+
+td > button:last-child {
+	background-color: var(--warning-clr);
+}
