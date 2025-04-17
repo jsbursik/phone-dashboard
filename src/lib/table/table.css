@@ -1,0 +1,38 @@
+table {
+	margin: 0 auto;
+	width: 66%;
+	border-spacing: 0px;
+}
+
+th,
+td {
+	padding: 0.5rem;
+}
+
+th {
+	width: 50%;
+}
+
+td {
+	text-align: center;
+}
+
+th:first-child {
+	border-bottom: 1px solid;
+	border-image: linear-gradient(270deg, var(--text-clr-secondary) 60%, var(--bg-clr-secondary)) 1;
+}
+
+th:last-child {
+	border-bottom: 1px solid;
+	border-image: linear-gradient(90deg, var(--text-clr-secondary) 60%, var(--bg-clr-secondary)) 1;
+
+	border-left: 0px;
+}
+
+tbody > tr:nth-child(even) > td:first-child {
+	background-image: linear-gradient(270deg, var(--bg-clr) 60%, var(--bg-clr-secondary));
+}
+
+tbody > tr:nth-child(even) > td:last-child {
+	background-image: linear-gradient(90deg, var(--bg-clr) 60%, var(--bg-clr-secondary));
+}

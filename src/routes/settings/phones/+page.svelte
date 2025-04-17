@@ -1,7 +1,12 @@
 <script lang="ts">
+	import Table from '$lib/table/table.svelte';
 	import CodeEditor from '$lib/code-editor/code-editor.svelte';
 	import ProfileForm from '$lib/profile-form/profile-form.svelte';
 </script>
+
+<div class="container">
+	<Table />
+</div>
 
 <div class="container">
 	<ProfileForm />
