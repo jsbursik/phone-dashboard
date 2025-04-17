@@ -48,6 +48,10 @@ main p {
 }
 
 .container {
+	display: grid;
+	grid-template-rows: 1fr;
+	transition: 300ms ease-in-out;
+
 	background-color: var(--bg-clr-secondary);
 	box-shadow: 0 2px 1em var(--bg-clr-secondary);
 
@@ -61,6 +65,10 @@ main p {
 	p {
 		margin-top: 1em;
 	}
+}
+
+.container.hidden {
+	grid-template-rows: 0fr;
 }
 
 table {

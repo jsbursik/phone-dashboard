@@ -1,4 +1,5 @@
 <script lang="ts">
+	import './code-editor.css';
 	import 'prism-code-editor/layout.css';
 	import 'prism-code-editor/scrollbar.css';
 	import 'prism-code-editor/themes/dracula.css';
