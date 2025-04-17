@@ -8,6 +8,9 @@
 	--line-clr: #141618;
 	--hover-clr: #222527;
 	--accent-clr: #69a9fd;
+
+	--success-clr: #4ec572;
+	--warning-clr: #cf4f4f;
 }
 
 * {
@@ -58,4 +61,48 @@ main p {
 	p {
 		margin-top: 1em;
 	}
+}
+
+table {
+	margin: 0 auto;
+	table-layout: fixed;
+	width: 66%;
+	border-spacing: 0px;
+}
+
+th,
+td {
+	padding: 0.5rem;
+}
+
+td {
+	text-align: center;
+}
+
+th:first-child {
+	border-bottom: 1px solid;
+	border-image: linear-gradient(270deg, var(--text-clr-secondary) 60%, var(--bg-clr-secondary)) 1;
+}
+
+th:not(:first-child):not(:last-child) {
+	border-bottom: 1px solid var(--text-clr-secondary);
+}
+
+th:last-child {
+	border-bottom: 1px solid;
+	border-image: linear-gradient(90deg, var(--text-clr-secondary) 60%, var(--bg-clr-secondary)) 1;
+
+	border-left: 0px;
+}
+
+tbody > tr:nth-child(even) > td:first-child {
+	background-image: linear-gradient(270deg, var(--bg-clr) 60%, var(--bg-clr-secondary));
+}
+
+tbody > tr:nth-child(even) > td:not(:first-child):not(:last-child) {
+	background-color: var(--bg-clr);
+}
+
+tbody > tr:nth-child(even) > td:last-child {
+	background-image: linear-gradient(90deg, var(--bg-clr) 60%, var(--bg-clr-secondary));
 }
