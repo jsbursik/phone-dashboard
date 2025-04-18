@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import Icon from '@iconify/svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { sidebarState } from '../sidebar.store';
 
 	type DropdownProps = {
