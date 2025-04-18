@@ -24,3 +24,5 @@ vite.config.ts.timestamp-*
 
 # Sensitive
 /src/cfgs/*
+
+/src/schema.json
