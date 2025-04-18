@@ -61,7 +61,6 @@ main p {
 
 .container {
 	display: grid;
-	grid-template-rows: 1fr;
 	transition: 300ms ease-in-out;
 	z-index: 99;
 
@@ -72,12 +71,19 @@ main p {
 	border-radius: 1em;
 
 	margin-bottom: 1.2rem;
-	padding-block: min(3em, 15%);
-	padding-inline: max(3em, 15%);
+	padding: min(3em, 15%);
 
 	h2,
 	p {
 		margin-top: 1em;
+	}
+
+	p {
+		max-width: 80ch;
+	}
+
+	&:has(> p) {
+		padding-inline: calc(50% - 40ch);
 	}
 }
 

@@ -2,6 +2,7 @@
 	import Icon from '@iconify/svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { sidebarState } from '../sidebar.store';
+	import { page } from '$app/state';
 
 	type DropdownProps = {
 		icon: string;
@@ -26,8 +27,12 @@
 	}
 </script>
 
-<li>
-	<button class="dropdown-btn" onclick={handleToggle}>
+<li class:active={page.url.pathname.startsWith('/settings/')}>
+	<button
+		class="dropdown-btn"
+		class:active={page.url.pathname.startsWith('/settings/')}
+		onclick={handleToggle}
+	>
 		<Icon icon={props.icon} class="inline" />
 		<span>{props.name}</span>
 		<Icon

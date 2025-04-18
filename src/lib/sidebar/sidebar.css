@@ -47,7 +47,11 @@
 	place-items: center;
 }
 
-#sidebar ul li.active a {
+#sidebar ul li.active > a {
+	color: var(--accent-clr);
+}
+
+#sidebar ul li button.active {
 	color: var(--accent-clr);
 }
 

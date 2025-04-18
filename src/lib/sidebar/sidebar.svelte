@@ -5,6 +5,7 @@
 	import { sidebarState } from './sidebar.store';
 
 	import './sidebar.css';
+	import { page } from '$app/state';
 
 	let sidebarClosed = true;
 
@@ -33,8 +34,12 @@
 		<ListItem href="/" icon="fa6-solid:house" name="Dashboard" />
 		<ListItem href="/phones" icon="fa6-solid:phone" name="Phones" />
 		<Dropdown icon="fa6-solid:gear" name="Settings" on:toggle={handleDropdown}>
-			<li><a href="/settings/profiles">Phone Profiles</a></li>
-			<li><a href="/settings/manager">PM Settings</a></li>
+			<li class:active={page.url.pathname === '/settings/profiles'}>
+				<a href="/settings/profiles">Phone Profiles</a>
+			</li>
+			<li class:active={page.url.pathname === '/settings/manager'}>
+				<a href="/settings/manager">PM Settings</a>
+			</li>
 		</Dropdown>
 	</ul>
 </nav>
