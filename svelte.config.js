@@ -16,6 +16,9 @@ const config = {
 			hooks: {
 				server: 'src/hooks.server.ts'
 			}
+		},
+		alias: {
+			'~/*': 'src/*'
 		}
 	}
 };
