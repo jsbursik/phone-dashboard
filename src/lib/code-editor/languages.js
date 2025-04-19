@@ -11,5 +11,8 @@ languages.phone_cfgs = {
 	keyword: [
 			/(.*?)=/,
 			/(.*?):/
-	]
+	],
+	function: {
+		pattern: /\$.*/
+	}
 };
