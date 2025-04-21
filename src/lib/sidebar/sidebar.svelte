@@ -2,20 +2,36 @@
 	import Icon from '@iconify/svelte';
 	import ListItem from './list-item/list-item.svelte';
 	import Dropdown from './dropdown/dropdown.svelte';
-	import { sidebarState } from './sidebar.store';
+	import { colorMode, sidebarState } from './sidebar.store';
 
 	import './sidebar.css';
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	let sidebarClosed = true;
+	let darkMode = false;
 
 	$: $sidebarState = sidebarClosed;
+	$: $colorMode = darkMode;
 
 	function handleDropdown() {
 		if ($sidebarState) {
 			sidebarState.set(false);
 		}
 	}
+
+	function handleDarkMode() {
+		colorMode.set(!$colorMode);
+		document.body.setAttribute('data-theme', $colorMode ? 'dark' : 'light');
+	}
+
+	onMount(() => {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			colorMode.set(true);
+		} else {
+			colorMode.set(false);
+		}
+	});
 </script>
 
 <nav id="sidebar" class={$sidebarState ? 'closed' : ''}>
@@ -41,5 +57,10 @@
 				<a href="/settings/manager">PM Settings</a>
 			</li>
 		</Dropdown>
+		<li>
+			<button onclick={handleDarkMode}>
+				<Icon icon={$colorMode ? 'fa6-solid:sun' : 'fa6-solid:moon'} class="inline" />
+			</button>
+		</li>
 	</ul>
 </nav>

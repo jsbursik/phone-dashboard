@@ -42,6 +42,27 @@
 	}
 }
 
+#sidebar > ul > li:last-child {
+	position: absolute;
+
+	bottom: 1em;
+	left: 1em;
+
+	> button {
+		height: 2rem;
+		aspect-ratio: 1/1;
+
+		border: none;
+		border-radius: 1rem;
+
+		background-color: var(--accent-clr);
+
+		> svg {
+			transform: translateY(3px);
+		}
+	}
+}
+
 #toggle-btn {
 	display: grid;
 	place-items: center;
