@@ -13,6 +13,6 @@ languages.phone_cfgs = {
 			/(.*?):/
 	],
 	function: {
-		pattern: /\$.*/
+		pattern: /\$\S*/
 	}
 };
