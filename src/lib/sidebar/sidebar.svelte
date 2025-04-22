@@ -6,7 +6,6 @@
 
 	import './sidebar.css';
 	import { page } from '$app/state';
-	import { onMount } from 'svelte';
 
 	let sidebarClosed = true;
 	let darkMode = false;
@@ -24,14 +23,6 @@
 		colorMode.set(!$colorMode);
 		document.body.setAttribute('data-theme', $colorMode ? 'dark' : 'light');
 	}
-
-	onMount(() => {
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			colorMode.set(true);
-		} else {
-			colorMode.set(false);
-		}
-	});
 </script>
 
 <nav id="sidebar" class={$sidebarState ? 'closed' : ''}>
