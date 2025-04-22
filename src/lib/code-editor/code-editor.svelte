@@ -31,19 +31,4 @@
 	});
 </script>
 
-<div class="form-group" style="margin: 1rem auto;">
-	<div class="form-row">
-		<span class="form-control">
-			<label for="model">Model:</label>
-			<input type="text" id="model" />
-		</span>
-	</div>
-</div>
-
 <div id="editor"></div>
-
-<div style="padding-top: 1rem;">
-	<div class="form-row">
-		<button class="btn btn-primary" style="margin-left: auto">Submit</button>
-	</div>
-</div>
