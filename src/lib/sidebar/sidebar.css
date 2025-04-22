@@ -17,11 +17,6 @@
 	text-wrap: nowrap;
 }
 
-#sidebar svg:first-child {
-	width: 1.5em;
-	height: 1.5em;
-}
-
 #sidebar.closed {
 	padding: 5px;
 	width: 60px;
@@ -42,18 +37,41 @@
 	}
 }
 
+#toggle-btn {
+	margin-left: auto;
+
+	height: 50px;
+	aspect-ratio: 1/1;
+
+	color: var(--text-clr);
+	background: none;
+
+	border: none;
+	border-radius: 0.5em;
+
+	cursor: pointer;
+
+	> svg {
+		transform: translateY(2px);
+	}
+}
+
+#toggle-btn:hover {
+	background-color: var(--hover-clr);
+}
+
 #sidebar > ul > li:last-child {
 	position: absolute;
 
-	bottom: 1em;
-	left: 1em;
+	bottom: 9px;
+	left: 9px;
 
 	> button {
-		height: 2rem;
+		height: 41px;
 		aspect-ratio: 1/1;
 
 		border: none;
-		border-radius: 1rem;
+		border-radius: 100%;
 
 		background-color: var(--accent-clr);
 
@@ -61,11 +79,6 @@
 			transform: translateY(3px);
 		}
 	}
-}
-
-#toggle-btn {
-	display: grid;
-	place-items: center;
 }
 
 #sidebar ul li.active > a {
@@ -76,13 +89,24 @@
 	color: var(--accent-clr);
 }
 
+/* This sets all the icon sizes */
+
+#sidebar svg {
+	width: 30px;
+	height: 30px;
+
+	flex-shrink: 0;
+}
+
+/* These are the link icons */
 #sidebar a,
 #sidebar .dropdown-btn,
 #sidebar .logo {
 	border-radius: 0.5em;
-	padding: 0.85em;
+	padding: 10px;
 	text-decoration: none;
 	color: var(--text-clr);
+
 	display: flex;
 	align-items: center;
 	gap: 1em;
@@ -95,10 +119,6 @@
 	border: none;
 	font: inherit;
 	cursor: pointer;
-}
-
-#sidebar svg {
-	flex-shrink: 0;
 }
 
 #sidebar a span,
@@ -127,22 +147,12 @@
 
 .dropdown-btn svg {
 	transition: 300ms ease-in-out;
+
+	&:last-of-type {
+		height: 20px !important;
+	}
 }
 
 #sidebar .sub-menu a {
 	padding-left: 2em;
-}
-
-#toggle-btn {
-	margin-left: auto;
-	padding: 1em;
-	border: none;
-	border-radius: 0.5em;
-	background: none;
-	cursor: pointer;
-	color: var(--text-clr);
-}
-
-#toggle-btn:hover {
-	background-color: var(--hover-clr);
 }
