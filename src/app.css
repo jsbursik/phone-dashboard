@@ -3,7 +3,7 @@
 	--bg-clr-secondary: #ebeef3;
 
 	--line-clr: #b3b6b9;
-	--hover-clr: #d8dee2;
+	--hover-clr: #d2d7e0;
 
 	--text-clr: #2a2b2c;
 	--text-clr-secondary: #3e3f41;
@@ -79,7 +79,7 @@ a {
 }
 
 a:visited {
-	color: var(--text-clr);
+	color: none;
 }
 
 ul {
@@ -224,6 +224,7 @@ tbody > tr:nth-child(even) > td:last-child {
 .form-control {
 	padding: 0.2rem;
 	position: relative;
+
 	border: 2px solid var(--line-clr);
 	border-radius: 1.3rem;
 }
@@ -231,13 +232,13 @@ tbody > tr:nth-child(even) > td:last-child {
 input {
 	position: relative;
 
+	color: var(--text-clr);
 	background-color: var(--bg-clr);
 
 	border: 1px solid var(--line-clr);
 	border-radius: 1rem;
 
 	padding: 0.5rem 1rem;
-	z-index: 1;
 
 	&:focus {
 		outline: none;
@@ -247,12 +248,14 @@ input {
 }
 
 label:has(+ input) {
-	color: black;
-	position: absolute;
-	left: 1rem;
-	top: -0.9rem;
-	z-index: 4;
+	color: var(--text-clr);
 	background-color: var(--bg-clr);
+
 	border-radius: 5px;
 	padding: 0 0.4rem;
+
+	position: absolute;
+	top: -0.9rem;
+	left: 1rem;
+	z-index: 99;
 }
