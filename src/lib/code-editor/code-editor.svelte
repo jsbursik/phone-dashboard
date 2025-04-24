@@ -8,7 +8,22 @@
 
 	import { onMount } from 'svelte';
 
-	let { vars = $bindable(), ...props } = $props();
+	let {
+		vars = $bindable(),
+		language: l = 'text',
+		value: v = '',
+		config = false,
+		...props
+	} = $props();
+
+	let onU: (str: string) => void;
+
+	if (props.config) {
+		onU = (code: string) => {
+			const reg = /(?<!#.*)\$\S*/g;
+			vars = [...new Set(code.match(reg) as string[])];
+		};
+	}
 
 	vars = [];
 
@@ -16,13 +31,9 @@
 		const { createEditor } = await import('prism-code-editor');
 
 		const editor = createEditor('#editor', {
-			language: 'phone_cfgs',
-			value:
-				'# Paste your config here\n# For any dynamic values use "$value" format with $kebab_case\n$money\n$test',
-			onUpdate: (code) => {
-				const reg = /(?<!#.*)\$\S*/g;
-				vars = code.match(reg) as string[];
-			}
+			language: l,
+			value: v,
+			onUpdate: onU
 		});
 	}
 
