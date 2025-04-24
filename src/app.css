@@ -214,6 +214,7 @@ tbody > tr:nth-child(even) > td:last-child {
 
 .form-row {
 	display: flex;
+	align-items: center;
 	width: 100%;
 }
 
@@ -258,4 +259,71 @@ label:has(+ input) {
 	top: -0.9rem;
 	left: 1rem;
 	z-index: 99;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 2.2rem;
+	height: 1.4rem;
+}
+
+.switch > .label {
+	position: absolute;
+	left: 3.2rem;
+	text-wrap: nowrap;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-color: var(--bg-clr);
+	border: 2px solid var(--line-clr);
+
+	transition: 0.4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: '';
+	height: 0.6rem;
+	width: 0.6rem;
+	left: 0.3rem;
+	bottom: 0.3rem;
+
+	background-color: var(--line-clr);
+	transition: 0.4s;
+}
+
+input:checked + .slider {
+	border-color: var(--accent-clr-shadow);
+	background-color: var(--accent-clr-secondary);
+}
+
+input:checked + .slider:before {
+	background-color: var(--bg-clr);
+	transform: translateX(0.8rem);
+}
+
+input:focus + .slider:before {
+	box-shadow: 0 0 1px var(--accent-clr);
+}
+
+.slider.round {
+	border-radius: 1.6rem;
+}
+
+.slider.round:before {
+	border-radius: 50%;
 }
