@@ -13,6 +13,7 @@
 		language: l = 'text',
 		value: v = '',
 		config = false,
+		i: index = 0,
 		...props
 	} = $props();
 
@@ -30,7 +31,7 @@
 	async function createCodeEditor() {
 		const { createEditor } = await import('prism-code-editor');
 
-		const editor = createEditor('#editor', {
+		const editor = createEditor(`#editor-${index}`, {
 			language: l,
 			value: v,
 			onUpdate: onU
@@ -42,4 +43,4 @@
 	});
 </script>
 
-<div id="editor"></div>
+<div id={`editor-${index}`} class="code-editor"></div>
