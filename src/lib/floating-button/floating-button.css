@@ -1,0 +1,35 @@
+.btn-floating {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+
+	position: absolute;
+	z-index: 99;
+
+	height: 50px;
+
+	border: none;
+	padding: 1rem;
+	background-color: var(--accent-clr);
+}
+
+.btn-floating:has(> span) {
+	width: fit-content;
+	height: fit-content;
+	border-radius: 1rem;
+}
+
+.btn-floating:has(> svg):not(> span) {
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+.btn-floating:has(> svg):has(> span) {
+	gap: 0.5rem;
+
+	> svg {
+		transform: translateY(-1px);
+	}
+}
