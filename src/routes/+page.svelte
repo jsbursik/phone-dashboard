@@ -1,5 +1,18 @@
+<script lang="ts">
+	import InputField from '~/lib/form-components/input-field.svelte';
+</script>
+
 <div class="container">
-	<h2>Hello World!</h2>
+	<h1>Test Form</h1>
+	<form method="POST">
+		<div class="form-group">
+			<div class="form-row">
+				<InputField field="First Name" value="" />
+				<InputField field="Last Name" value="" />
+			</div>
+			<button class="btn btn-primary">Submit</button>
+		</div>
+	</form>
 </div>
 <div class="container">
 	<h2>Hello World!</h2>
