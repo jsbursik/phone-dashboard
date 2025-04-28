@@ -1,60 +1,40 @@
 <script lang="ts">
 	import CodeEditor from '$lib/code-editor/code-editor.svelte';
 	import InputField from '~/lib/form-components/input-field.svelte';
-	import Switch from '~/lib/form-components/switch.svelte';
+	import InfoTip from '~/lib/info-tip/info-tip.svelte';
+
+	import Icon from '@iconify/svelte';
+
+	import { editors, addEditor, removeEditor } from './state.svelte';
 
 	import './add_profile.css';
-	import FloatingButton from '~/lib/floating-button/floating-button.svelte';
 
-	const codeValue =
-		'# Paste your config here\n# For any dynamic values use "$value" format with $kebab_case\n$money\n$test';
+	let globalVars: string[] = $state<string[]>([]);
 
-	let varArr: string[] = [];
-
-	let editors = [
-		{
-			vars: [],
-			value: codeValue,
-			language: 'phone_cfgs',
-			config: true
+	function combineVars() {
+		for (const e of editors) {
+			globalVars = [...e.vars];
+			console.log(globalVars);
 		}
-	];
-
-	function addEditor() {
-		editors.push({
-			vars: [],
-			value: `#This code editor will maintain the same highlighting logic even if your file differes in structure.\n${counter++}`,
-			language: 'phone_cfgs',
-			config: true
-		});
 	}
-
-	// function handleSwitch(index: number) {
-	// 	if (!editors[index].additionalFile) {
-	// 		editors[index].additionalFile = true;
-	// 		editors = [
-	// 			...editors,
-	// 			{
-	// 				vars: [],
-	// 				value: `#This code editor will maintain the same highlighting logic even if your file differes in structure.\n${counter++}`,
-	// 				language: 'phone_cfgs',
-	// 				additionalFile: false,
-	// 				config: true
-	// 			}
-	// 		];
-	// 	} else {
-	// 		editors[index].additionalFile = false;
-	// 		editors.splice(index, 1);
-	// 	}
-	// }
 </script>
 
-{#each editors as editor, index}
+{#each editors as editor, index (editor.id)}
 	<div class="container-row">
 		<div class="container fit">
+			{#if index !== 0}
+				<button class="btn-close" onclick={() => removeEditor(editor.id)}
+					><Icon icon="fa6-solid:x" class="inline" /></button
+				>
+			{/if}
 			<div class="form-group">
 				<div class="form-row" style="justify-content: center">
 					<InputField field={index == 0 ? 'Model' : 'File name'} />
+					{#if index !== 0}
+						<InfoTip
+							tooltip="Enter the full name of the file with extension. Existing variables can be used like '$mac.boot' if it should be dynamically named"
+						/>
+					{/if}
 				</div>
 			</div>
 			<CodeEditor
@@ -64,12 +44,24 @@
 				config={editor.config}
 				i={index}
 			/>
+			{#if index == editors.length - 1}
+				<div style="margin: 1rem 0 0 auto">
+					<button class="btn btn-primary" onclick={() => addEditor()}>
+						<Icon icon="fa6-solid:plus"></Icon>
+						Add File
+					</button>
+					<button class="btn btn-primary">
+						<Icon icon="fa6-solid:thumbs-up"></Icon>
+						Submit
+					</button>
+				</div>
+			{/if}
 		</div>
 		{#if index == 0}
 			<div class="container fit">
 				<h1>Variables:</h1>
 				<ul class="var-list" style="color: var(--success-clr)">
-					{#each varArr as item}
+					{#each globalVars as item}
 						<li>{item}</li>
 					{/each}
 				</ul>
@@ -77,6 +69,3 @@
 		{/if}
 	</div>
 {/each}
-
-<FloatingButton icon="plus" bottom="1rem" right="8rem" text="Add another file" func={addEditor} />
-<FloatingButton icon="thumbs-up" bottom="1rem" right="1rem" text="Submit" />
