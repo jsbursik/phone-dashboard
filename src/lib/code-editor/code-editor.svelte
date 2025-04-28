@@ -9,24 +9,24 @@
 	import { onMount } from 'svelte';
 
 	let {
-		vars = $bindable(),
+		i: index = 0,
+		vars = $bindable<string[]>([]),
 		language: l = 'text',
 		value: v = '',
 		config = false,
-		i: index = 0,
 		...props
 	} = $props();
 
-	let onU: (str: string) => void;
+	let getVars: (str: string) => void;
+
+	vars = [];
 
 	if (props.config) {
-		onU = (code: string) => {
+		getVars = (code: string) => {
 			const reg = /(?<!#.*)\$\S*/g;
 			vars = [...new Set(code.match(reg) as string[])];
 		};
 	}
-
-	vars = [];
 
 	async function createCodeEditor() {
 		const { createEditor } = await import('prism-code-editor');
@@ -34,7 +34,7 @@
 		const editor = createEditor(`#editor-${index}`, {
 			language: l,
 			value: v,
-			onUpdate: onU
+			onUpdate: getVars
 		});
 	}
 
