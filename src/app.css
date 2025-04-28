@@ -94,6 +94,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 
+	position: relative;
 	height: fit-content;
 	width: 100%;
 
@@ -135,7 +136,32 @@ ul {
 	margin-top: -100vh;
 }
 
+.container .btn-close {
+	position: absolute;
+	height: 2rem;
+	aspect-ratio: 1/1;
+
+	display: grid;
+	place-items: center;
+
+	top: 1rem;
+	right: 1rem;
+
+	border: none;
+	border-radius: 1rem;
+	background-color: var(--bg-clr-secondary);
+
+	&:hover {
+		background-color: var(--hover-clr);
+		cursor: pointer;
+	}
+}
+
 .btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
 	width: fit-content;
 	padding: 0.7rem 2rem;
 	cursor: pointer;
@@ -152,6 +178,14 @@ ul {
 	&:hover {
 		background-color: var(--hover-clr);
 		box-shadow: 0 0 10px var(--line-clr);
+	}
+
+	&:has(> svg) {
+		gap: 0.5rem;
+
+		& > svg {
+			transform: translateY(-1px);
+		}
 	}
 }
 
@@ -224,11 +258,10 @@ tbody > tr:nth-child(even) > td:last-child {
 }
 
 .form-control {
-	padding: 0.2rem;
 	position: relative;
 
-	border: 2px solid var(--line-clr);
-	border-radius: 1.3rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 4px 2px var(--hover-clr);
 }
 
 input {
