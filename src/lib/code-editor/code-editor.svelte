@@ -10,21 +10,20 @@
 
 	let {
 		i: index = 0,
-		vars = $bindable<string[]>([]),
+		vars = $bindable(<string[]>[]),
 		language: l = 'text',
 		value: v = '',
 		config = false,
 		...props
 	} = $props();
 
-	let getVars: (str: string) => void;
-
-	vars = [];
+	let updateVars: (code: string) => void = () => {};
 
 	if (props.config) {
-		getVars = (code: string) => {
+		updateVars = (code) => {
 			const reg = /(?<!#.*)\$\S*/g;
-			vars = [...new Set(code.match(reg) as string[])];
+			const match = code.match(reg) ? (code.match(reg) as string[]) : [];
+			vars = [...new Set(match)];
 		};
 	}
 
@@ -34,7 +33,7 @@
 		const editor = createEditor(`#editor-${index}`, {
 			language: l,
 			value: v,
-			onUpdate: getVars
+			onUpdate: updateVars
 		});
 	}
 

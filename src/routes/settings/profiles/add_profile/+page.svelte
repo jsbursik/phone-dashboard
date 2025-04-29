@@ -5,18 +5,9 @@
 
 	import Icon from '@iconify/svelte';
 
-	import { editors, addEditor, removeEditor } from './state.svelte';
+	import { editors, addEditor, removeEditor, getVars } from './state.svelte';
 
 	import './add_profile.css';
-
-	let globalVars: string[] = $state<string[]>([]);
-
-	function combineVars() {
-		for (const e of editors) {
-			globalVars = [...e.vars];
-			console.log(globalVars);
-		}
-	}
 </script>
 
 {#each editors as editor, index (editor.id)}
@@ -29,8 +20,15 @@
 			{/if}
 			<div class="form-group">
 				<div class="form-row" style="justify-content: center">
-					<InputField field={index == 0 ? 'Model' : 'File name'} />
-					{#if index !== 0}
+					<InputField
+						field={index == 0 ? 'Model' : 'File name'}
+						index={index !== 0 ? index - 1 : 0}
+					/>
+					{#if index === 0}
+						<InfoTip
+							tooltip="Just the model name in this field - how you would like it to appear in the profile menu. If your phone supports a common config, place that down below as an additional file with the appropriate name and extension."
+						/>
+					{:else}
 						<InfoTip
 							tooltip="Enter the full name of the file with extension. Existing variables can be used like '$mac.boot' if it should be dynamically named"
 						/>
@@ -61,7 +59,7 @@
 			<div class="container fit">
 				<h1>Variables:</h1>
 				<ul class="var-list" style="color: var(--success-clr)">
-					{#each globalVars as item}
+					{#each getVars() as item}
 						<li>{item}</li>
 					{/each}
 				</ul>

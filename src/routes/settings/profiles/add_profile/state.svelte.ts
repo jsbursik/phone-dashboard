@@ -29,3 +29,14 @@ export function removeEditor(id: number) {
 	if (index === -1) return;
 	editors.splice(index, 1);
 }
+
+let allVars: string[] = [];
+
+export function getVars(): string[] {
+	let tempVars: string[] = [];
+	for (const e of editors) {
+		tempVars = [...tempVars, ...e.vars];
+		allVars = [...new Set(tempVars)];
+	}
+	return allVars;
+}
