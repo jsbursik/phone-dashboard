@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<div class="form-row" style="justify-content: center">
 					<InputField
-						field={index == 0 ? 'Model' : 'File name'}
+						field={index === 0 ? 'Model' : 'File name'}
 						index={index !== 0 ? index - 1 : 0}
 					/>
 					{#if index === 0}
