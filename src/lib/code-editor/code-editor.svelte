@@ -37,8 +37,14 @@
 		});
 	}
 
+	async function nameEditor() {
+		const textArea = document.querySelector(`#editor-${index} textarea`);
+		textArea?.setAttribute('name', `editor-${index}`);
+	}
+
 	onMount(async () => {
-		createCodeEditor();
+		await createCodeEditor();
+		await nameEditor();
 	});
 </script>
 
