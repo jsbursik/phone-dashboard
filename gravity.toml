@@ -1,2 +1,0 @@
-servicesFile = "src/lib/services/index.ts"
-schemaFile = "src/schema.json"

@@ -25,4 +25,5 @@ vite.config.ts.timestamp-*
 # Sensitive
 **/cfgs/*
 
-/src/schema.json
+# Local DX
+.claude
