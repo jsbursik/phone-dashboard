@@ -29,7 +29,7 @@
     <ListItem href="/phones" icon="fa6-solid:phone" name="Phones" />
     <Dropdown icon="fa6-solid:gear" name="Settings">
       <li class:active={page.url.pathname === "/settings/add-phone"}>
-        <a href="/settings/new-config">Add Phone</a>
+        <a href="/settings/add-phone">Add Phone</a>
       </li>
       <li class:active={page.url.pathname === "/settings/new-config"}>
         <a href="/settings/new-config">New Phone Config</a>
