@@ -1,19 +1,42 @@
 :root {
-  --bg-clr: #f1f2f3;
-  --bg-clr-secondary: #e8e9ee;
+  --bright-100: #f1f2f3;
+  --bright-200: #e8e9ee;
+  --bright-300: #d2d7e0;
+  --bright-400: #c3c7d0;
+  --bright-500: #b0b4bc;
 
-  --line-clr: #838586;
-  --hover-clr: #d2d7e0;
+  --dark-100: #82858d;
+  --dark-200: #3b3d41;
+  --dark-300: #2d2f31;
+  --dark-400: #1b1c1e;
 
-  --text-clr: #2a2b2c;
-  --text-clr-secondary: #3e3f41;
+  --blue-100: #5095f0;
+  --blue-200: #3b7ed6;
+  --blue-300: #3065ac;
 
-  --accent-clr: #5095f0;
-  --accent-clr-secondary: #4b98fc;
-  --accent-clr-shadow: #295186;
+  --green-100: #4ec572;
+  --green-200: #48b368;
+  --green-300: #3e9959;
 
-  --success-clr: #4ec572;
-  --warning-clr: #cf4f4f;
+  --red-100: #cf4f4f;
+  --red-200: #b44545;
+  --red-300: #9d3d3d;
+
+  --text-clr: var(--dark-300);
+  --text-clr-secondary: var(--dark-200);
+
+  --bg-clr: var(--bright-100);
+  --bg-clr-secondary: var(--bright-200);
+
+  --line-clr: var(--dark-100);
+  --hover-clr: var(--bright-400);
+
+  --accent-clr: var(--blue-100);
+  --accent-clr-200: var(--blue-200);
+  --accent-clr-300: var(--blue-300);
+
+  --success-clr: var(--green-100);
+  --warning-clr: var(--red-100);
 
   --chart-primary: var(--accent-clr);
   --chart-secondary: var(--success-clr);
@@ -21,14 +44,14 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-clr: #22252b;
-  --bg-clr-secondary: #1b1e20;
+  --text-clr: var(--bright-200);
+  --text-clr-secondary: --var(bright-300);
 
-  --text-clr: #caced1;
-  --text-clr-secondary: #afb2b4;
+  --bg-clr: var(--dark-200);
+  --bg-clr-secondary: var(--dark-300);
 
-  --line-clr: #141618;
-  --hover-clr: #2e333d;
+  --line-clr: var(--dark-400);
+  --hover-clr: var(--blue-300);
 }
 
 * {
@@ -251,15 +274,15 @@ button:active {
   }
 
   &:active {
-    border: 1px solid var(--accent-clr-shadow);
-    box-shadow: 0 0 10px var(--accent-clr-shadow);
+    border: 1px solid var(--accent-clr-300);
+    box-shadow: 0 0 10px var(--accent-clr-300);
     outline: none;
   }
 }
 
 .btn-primary {
   color: var(--bg-clr);
-  background-color: var(--accent-clr-secondary);
+  background-color: var(--accent-clr-200);
 
   &:hover {
     background-color: var(--accent-clr);

@@ -3,9 +3,10 @@
   display: flex;
   width: 100%;
   width: 70ch;
+  height: 14rem;
   border: 1px solid var(--line-clr);
-  border-radius: 1rem;
-  background-color: var(--bg-clr);
+  border-radius: 0.5rem;
+  background-color: var(--dark-300);
   overflow: hidden;
 
   &:focus-within {
@@ -20,16 +21,17 @@
 }
 
 .line-numbers {
-  background-color: var(--hover-clr);
-  border-right: 1px solid var(--line-clr);
-  padding: 0.5rem 0.25rem 0.5rem 0.5rem;
-  font-family: "Courier New", Consolas, monospace;
+  background-color: var(--dark-400);
+  border-right: 1px solid var(--bright-500);
+  padding: 0.5rem 0.4rem 0.5rem 0.5rem;
+  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: var(--text-clr-muted, #888);
+  color: var(--bright-400);
   user-select: none;
   overflow: hidden;
-  min-width: 2.5rem;
+  min-width: 2rem;
   text-align: right;
 }
 
@@ -45,47 +47,71 @@
   background: transparent;
   border: none;
   outline: none;
-  resize: vertical;
+  resize: none;
   padding: 0.5rem;
-  font-family: "Courier New", Consolas, monospace;
+  color: var(--bright-400);
+  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: var(--text-clr);
   overflow-y: auto;
   white-space: pre;
   overflow-wrap: normal;
   overflow-x: auto;
   position: relative;
-  z-index: 2;
+  z-index: 1;
+
+  /* Custom scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--line-clr);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--text-clr-muted);
+  }
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-clr) transparent;
 }
 
 .syntax-overlay {
   position: absolute;
   top: 0;
-  left: 2.5rem;
+  left: 2rem;
   right: 0;
   padding: 0.5rem;
-  font-family: "Courier New", Consolas, monospace;
+  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
   font-size: 0.875rem;
   line-height: 1.5;
   pointer-events: none;
   white-space: pre;
   overflow: hidden;
-  z-index: 1;
+  z-index: 9999;
   color: transparent;
 }
 
 .config-key {
-  color: #0ea5e9; /* Blue for keys */
-  font-weight: 500;
+  font-weight: 700;
+  color: var(--blue-100); /* Blue for keys */
 }
 
 .config-separator {
-  color: #64748b; /* Gray for separators */
+  font-weight: 700;
+  color: var(--bright-400); /* Gray for separators */
 }
 
 .config-value {
-  color: #10b981; /* Green for values */
+  font-weight: 700;
+  color: var(--green-100); /* Green for values */
 }
 
 label:has(+ .code-input-container) {
