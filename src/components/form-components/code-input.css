@@ -1,0 +1,96 @@
+.code-input-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  width: 70ch;
+  border: 1px solid var(--line-clr);
+  border-radius: 1rem;
+  background-color: var(--bg-clr);
+  overflow: hidden;
+
+  &:focus-within {
+    border: 1px solid var(--accent-clr);
+    box-shadow: 0 0 4px 2px var(--accent-clr);
+  }
+
+  &.invalid {
+    box-shadow: 0 0 3px var(--warning-clr) !important;
+    border-color: var(--warning-clr) !important;
+  }
+}
+
+.line-numbers {
+  background-color: var(--hover-clr);
+  border-right: 1px solid var(--line-clr);
+  padding: 0.5rem 0.25rem 0.5rem 0.5rem;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-clr-muted, #888);
+  user-select: none;
+  overflow: hidden;
+  min-width: 2.5rem;
+  text-align: right;
+}
+
+.line-number {
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.code-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  padding: 0.5rem;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-clr);
+  overflow-y: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.syntax-overlay {
+  position: absolute;
+  top: 0;
+  left: 2.5rem;
+  right: 0;
+  padding: 0.5rem;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  pointer-events: none;
+  white-space: pre;
+  overflow: hidden;
+  z-index: 1;
+  color: transparent;
+}
+
+.config-key {
+  color: #0ea5e9; /* Blue for keys */
+  font-weight: 500;
+}
+
+.config-separator {
+  color: #64748b; /* Gray for separators */
+}
+
+.config-value {
+  color: #10b981; /* Green for values */
+}
+
+label:has(+ .code-input-container) {
+  color: var(--text-clr);
+  padding: 0 0.4rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
