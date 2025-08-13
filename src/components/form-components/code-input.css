@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
 :root {
   --console-bg: var(--dark-200);
   --line-bg: var(--dark-300);
@@ -5,6 +7,8 @@
   --sep-clr: var(--bright-300);
   --val-clr: aqua;
   --var-clr: chartreuse;
+
+  --cfg-font: "Source Code Pro", monospace;
 }
 
 .code-input-container {
@@ -36,7 +40,7 @@
   border-right: 1px solid var(--bright-500);
   background-color: var(--line-bg);
 
-  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-family: var(--cfg-font);
   font-weight: bold;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -66,7 +70,7 @@
   resize: none;
 
   color: var(--bright-400);
-  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-family: var(--cfg-font);
   font-size: 0.875rem;
   line-height: 1.5;
 
@@ -106,9 +110,9 @@
   padding: 0.5rem;
   z-index: 9999;
 
-  color: transparent;
-  font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
-  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0);
+  font-family: var(--cfg-font);
+  font-size: 0.878rem;
   line-height: 1.5;
 
   white-space: pre;
@@ -133,6 +137,11 @@
 
 .config-variable {
   color: var(--var-clr);
+  font-weight: bold;
+}
+
+.config-comment {
+  color: var(--text-clr);
   font-weight: bold;
 }
 
