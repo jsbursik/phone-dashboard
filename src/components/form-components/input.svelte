@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { inputValidation } from "$lib/actions/inputValidation";
-  import type { InputType } from "$appTypes";
+  import { inputValidation, type InputType } from "./inputValidation";
 
   let { type = "text" as InputType, id, label, value = $bindable(), error = "", ...props } = $props();
 
