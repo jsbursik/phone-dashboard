@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Icon from '@iconify/svelte';
+  import Icon from "@iconify/svelte";
 
-	let { tooltip = 'Test Tooltip with a lot of words to see how it renders' } = $props();
+  let { center = false, ...props } = $props();
 
-	import './info-tip.css';
+  import "./info-tip.css";
 </script>
 
 <span class="info-tip">
-	<Icon icon="fa6-solid:circle-info" />
-	<div id="info-tip">{tooltip}</div>
+  <Icon icon="fa6-solid:circle-info" />
+  <div id="info-tip" style={center ? "text-align: center" : ""}>{@render props.children()}</div>
 </span>
