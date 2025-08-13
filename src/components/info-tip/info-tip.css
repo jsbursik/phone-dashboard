@@ -10,7 +10,7 @@
   }
 
   &:hover {
-    color: var(--accent-clr-secondary);
+    color: var(--accent-clr-200);
   }
 
   &:hover > #info-tip {
@@ -23,14 +23,13 @@
   display: none;
 
   width: 30ch;
-
   padding: 1rem;
 
   top: -150%;
   left: 2rem;
   z-index: 99;
 
-  border: 2px solid var(--hover-clr);
+  border: 2px solid var(--bg-clr-300);
   border-radius: 1rem;
 
   color: var(--text-clr);
