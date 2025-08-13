@@ -8,6 +8,10 @@ input {
 
   padding: 0.5rem 1rem;
 
+  &::placeholder {
+    color: var(--text-clr-200);
+  }
+
   &:focus {
     outline: none;
     border: 1px solid var(--accent-clr);
@@ -17,7 +21,7 @@ input {
   &[type="text"],
   &[type="email"],
   &[type="tel"] {
-    box-shadow: 0 0 4px 2px var(--hover-clr);
+    box-shadow: 0 0 5px var(--line-clr);
   }
 
   &.valid {
