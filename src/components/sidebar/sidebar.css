@@ -80,7 +80,7 @@
 }
 
 :root:not([data-theme="dark"]) #sidebar > ul > li:last-child > button {
-  background-color: var(--text-clr-secondary);
+  background-color: var(--text-clr-200);
 }
 
 :root[data-theme="dark"] #sidebar > ul > li:last-child > button {
