@@ -12,6 +12,7 @@
   display: flex;
   height: 14rem;
   width: 70ch;
+  margin-block: 1rem;
 
   border: 1px solid var(--line-clr);
   border-radius: 0.5rem;
@@ -105,7 +106,7 @@
   padding: 0.5rem;
   z-index: 9999;
 
-  /* color: transparent; play with this later */
+  color: transparent;
   font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace;
   font-size: 0.875rem;
   line-height: 1.5;
