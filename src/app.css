@@ -14,6 +14,8 @@
   --blue-200: #3b7ed6;
   --blue-300: #3065ac;
 
+  --blue-100-50: color-mix(in srgb, var(--blue-100) 50%, transparent);
+
   --green-100: #4ec572;
   --green-200: #48b368;
   --green-300: #3e9959;

@@ -67,12 +67,12 @@
 
 /* Focus states */
 .switch input:focus + .slider {
-  box-shadow: 0 0 5px var(--accent-clr);
+  box-shadow: 0 0 5px var(--blue-100-50);
   outline: none;
 }
 
 .switch input:focus + .slider:before {
-  box-shadow: 0 0 1px var(--accent-clr);
+  box-shadow: 0 0 1px var(--blue-100-50);
 }
 
 /* Rounded slider */

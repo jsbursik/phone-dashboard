@@ -11,7 +11,7 @@ input {
   &:focus {
     outline: none;
     border: 1px solid var(--accent-clr);
-    box-shadow: 0 0 4px 2px var(--accent-clr);
+    box-shadow: 0 0 4px 2px var(--blue-100-50);
   }
 
   &[type="text"],

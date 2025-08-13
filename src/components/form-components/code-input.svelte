@@ -54,6 +54,9 @@
       {@html value.replace(
         /^(\w+)\s*([:=])\s*(.+)$/gm,
         '<span class="config-key">$1</span><span class="config-separator">$2</span><span class="config-value">$3</span>'
+      ).replace(
+        /(\$\w+)/g,
+        '<span class="config-variable">$1</span>'
       )}
     </div>
   </div>

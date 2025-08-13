@@ -28,7 +28,7 @@
       &:focus {
         outline: none;
         border: 1px solid var(--accent-clr);
-        box-shadow: 0 0 3px var(--accent-clr);
+        box-shadow: 0 0 3px var(--blue-100-50);
       }
     }
 
