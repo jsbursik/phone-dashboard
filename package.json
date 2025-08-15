@@ -38,7 +38,8 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "svelte-kit"
     ]
   }
 }
