@@ -41,3 +41,8 @@ label:has(+ input[type="tel"]) {
   color: var(--text-clr);
   padding: 0 0.4rem;
 }
+
+small {
+  text-align: center;
+  display: block;
+}

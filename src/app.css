@@ -428,4 +428,8 @@ form {
       gap: 0.5rem;
     }
   }
+
+  &:has(> .container-row) {
+    flex-direction: column;
+  }
 }

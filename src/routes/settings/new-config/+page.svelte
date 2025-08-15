@@ -1,9 +1,14 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
   import type { PageProps } from "./$types";
+
   import CodeInput from "~/components/form-components/code-input.svelte";
   import Input from "~/components/form-components/input.svelte";
   import InfoTip from "~/components/info-tip/info-tip.svelte";
+
+  let { form }: PageProps = $props();
+  let errors = form?.errors;
+  let values = form?.values;
+  let errorMap = $derived(errors ? Object.fromEntries(errors.map((e) => [e.field, e.message])) : {});
 
   type PhoneConfig = {
     filename: string;
@@ -11,6 +16,19 @@
   };
 
   let files = $state<PhoneConfig[]>([{ filename: "", config: "" }]);
+
+  $effect(() => {
+    if (values) {
+      const inputKeys = Object.keys(values).filter((key) => key.startsWith("input-"));
+      files = inputKeys.map((inputKey) => {
+        const index = inputKey.split("-")[1];
+        return {
+          filename: (values[`input-${index}`] as string) || "",
+          config: (values[`code-${index}`] as string) || "",
+        };
+      });
+    }
+  });
 
   function addFile() {
     files.push({ filename: "", config: "" });
@@ -21,7 +39,7 @@
   }
 </script>
 
-<form method="POST" use:enhance>
+<form method="POST">
   {#each files as file, i}
     <div class="container-row">
       <div class="container fit">
@@ -29,7 +47,14 @@
           <button class="btn-close" onclick={() => removeFile(i)}>✕</button>
         {/if}
         <div class="row g-1" style="justify-content: center">
-          <Input id={`input-${i}`} label="" placeholder={i == 0 ? "Phone Model" : "File Name"} bind:value={file.filename} required />
+          <Input
+            id={`input-${i}`}
+            label=""
+            placeholder={i == 0 ? "Phone Model" : "File Name"}
+            bind:value={file.filename}
+            error={errorMap[`input-${i}`]}
+            required
+          />
           <InfoTip center>Use a file name syntax like 't34w.cfg'</InfoTip>
         </div>
         <CodeInput id={`code-${i}`} label="" bind:value={file.config} />
