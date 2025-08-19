@@ -24,6 +24,7 @@ vite.config.ts.timestamp-*
 
 # Sensitive
 **/cfgs/*
+real_cfgs
 
 # Local DX
 .claude
