@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CodeInput from "~/components/form-components/code-input.svelte";
+  import CodeEditor from "~/components/form-components/code-editor.svelte";
 </script>
 
 <div class="container-row">
@@ -10,6 +10,6 @@
 
 <div class="container-row">
   <div class="container">
-    <CodeInput id="test" label="Test" />
+    <CodeEditor id="test" />
   </div>
 </div>

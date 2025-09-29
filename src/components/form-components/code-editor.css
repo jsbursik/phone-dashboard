@@ -1,0 +1,33 @@
+:root {
+  --line-indent: 2.501ch;
+}
+
+.pce-overlays,
+div.pce-overlays > *,
+.pce-no-selection .active-line:after,
+.active-line.match-highlight:after {
+  right: 1rem !important;
+}
+
+.prism-code-editor {
+  border-radius: 0.75rem;
+  scroll-padding-left: calc(var(--_pse) + var(--line-indent) + var(--_ns)) !important;
+}
+
+.prism-code-editor textarea {
+  padding: 0 var(--_pse) 0 calc(var(--_pse) + var(--line-indent) + var(--_ns)) !important;
+}
+
+.show-line-numbers:before,
+.pce-line:before {
+  width: calc(var(--_pse) + var(--line-indent) + var(--_ns)) !important;
+}
+
+.show-line-numbers .pce-line:before {
+  --pl: calc(var(--_pse) + var(--line-indent) + var(--_ns));
+  margin: 0 0 0 calc(-1 * var(--pl)) !important;
+}
+
+.pce-line {
+  margin: 0 0 0 calc(var(--_pse) + var(--line-indent) + var(--_ns)) !important;
+}
