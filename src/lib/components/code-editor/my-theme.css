@@ -1,0 +1,50 @@
+.prism-code-editor {
+  caret-color: var(--color-text);
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  --editor__bg: var(--color-bg);
+  --editor__bg-highlight: color-mix(in srgb, var(--color-bg), 5% black);
+  --editor__line-number: var(--color-text-muted);
+  --pce-selection: var(--editor__bg-highlight);
+  color-scheme: dark;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  --color-attr-name: var(--color-text-muted);
+  --color-attr-value: var(--color-primary);
+  --color-variable: var(--color-success);
+}
+
+:root[data-theme="dark"] .prism-code-editor {
+  --editor__bg: var(--color-bg);
+  --editor__bg-highlight: color-mix(in srgb, var(--color-bg), 12% white);
+  --color-attr-name: #7bd2fe;
+  --color-attr-value: #d497f5;
+  --color-variable: #beec86;
+}
+
+textarea.pce-textarea:focus {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.active-line {
+  --editor__line-number: var(--color-text);
+}
+
+[class*="language-"] {
+  color: var(--color-text-muted);
+}
+
+.token.comment {
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.token.attr-name {
+  color: var(--color-attr-name);
+}
+.token.attr-value {
+  color: var(--color-attr-value);
+}
+.token.variable {
+  color: var(--color-variable);
+}

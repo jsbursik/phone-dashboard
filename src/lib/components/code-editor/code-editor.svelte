@@ -10,7 +10,7 @@
   onMount(async () => {
     const { createEditor } = await import("prism-code-editor");
     await import("prism-code-editor/layout.css");
-    await import("prism-code-editor/themes/github-dark.css");
+    await import("./my-theme.css");
 
     const editor = createEditor(editorContainer, {
       language: "phone-config",
