@@ -4,13 +4,13 @@ languages["phone-config"] = {
   comment: {
     pattern: /#.*/, // Comments
   },
-  tag: {
+  variable: {
     pattern: /\$\w+/, // Variables
   },
-  keyword: {
-    pattern: /\w+\s*(?==|:)/, // Fields
+  "attr-name": {
+    pattern: /[\.\w]+\s*(?==|:)/,
   },
-  function: {
-    pattern: /(?<==|:).+/, // Values
+  "attr-value": {
+    pattern: /(?<==|:).+/,
   },
 };
