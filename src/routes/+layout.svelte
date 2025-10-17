@@ -13,6 +13,7 @@
   import { setContext } from "svelte";
   import { env } from "$env/dynamic/public";
   import "@jsbursik/magic-ui/styles";
+  import "./local.css";
 
   let { children, data } = $props();
   let user = $derived(data.user);
@@ -33,9 +34,8 @@
     <span>Phone Dashboard</span>
   </NavbarBrand>
   <NavbarContent>
-    <NavLink href="/">Home</NavLink>
     <NavLink href="/css-demo">CSS Demo</NavLink>
-    <NavLink href="/test-form">Test Form</NavLink>
+    <NavLink href="/add-config">Add Config</NavLink>
     {#if user}
       <NavLink href="/secret">Secret</NavLink>
     {/if}
