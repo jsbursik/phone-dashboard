@@ -2,10 +2,10 @@ import { languages } from "prism-code-editor/prism";
 
 languages["phone-config"] = {
   comment: {
-    pattern: /#.*/, // Comments
+    pattern: /#.*/,
   },
   variable: {
-    pattern: /\$\w+/, // Variables
+    pattern: /\$\w+/,
   },
   "attr-name": {
     pattern: /[\.\w]+\s*(?==|:)/,
