@@ -4,6 +4,7 @@
   import { NavbarContent } from "@jsbursik/magic-ui";
   import { NavLink } from "@jsbursik/magic-ui";
   import { NavbarMenu } from "@jsbursik/magic-ui";
+  import { NavbarDropdown } from "@jsbursik/magic-ui";
   import { UserMenu } from "@jsbursik/magic-ui";
   import { ToastContainer } from "@jsbursik/magic-ui";
   import { ModeToggle } from "@jsbursik/magic-ui";
@@ -34,8 +35,15 @@
     <span>Phone Dashboard</span>
   </NavbarBrand>
   <NavbarContent>
+    <NavLink href="/">Home</NavLink>
     <NavLink href="/css-demo">CSS Demo</NavLink>
-    <NavLink href="/add-config">Add Config</NavLink>
+    <NavbarDropdown
+      name="Phone Config"
+      menuItems={[
+        { label: "Add Config", href: "/phones/add-config" },
+        { label: "Edit Config", href: "/phones/edit-config" },
+      ]}
+    />
     {#if user}
       <NavLink href="/secret">Secret</NavLink>
     {/if}
