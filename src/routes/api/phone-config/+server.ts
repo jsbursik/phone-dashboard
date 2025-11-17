@@ -12,7 +12,6 @@ interface PhoneConfigRequest {
 
 export const POST: RequestHandler = async ({ request }) => {
   const { values, editors, variables }: PhoneConfigRequest = await request.json();
-
   const phone_config: PhoneConfigSchema = {
     phone_model: values["phone-model"],
     phone_cfg_filename: values["phone-cfg-filename"],
@@ -20,31 +19,12 @@ export const POST: RequestHandler = async ({ request }) => {
     additional_files: [],
     variables,
   };
-
   phone_config.additional_files = editors.map((editorId) => {
     return {
       filename: values[`${editorId}-id`],
       content: values[`${editorId}-code`],
     };
   });
-
   await db.insert(phoneConfigs).values(phone_config);
-
   return json({ success: true });
 };
-
-/* Model Schema 
-{
-  phone_model: "T-34W",
-  phone_cfg_filename: "$mac.cfg",
-  phone_cfg: <string>
-  additional_files: [
-    {
-      filename: "$mac.boot"
-      content: <string>
-    },
-    ...
-  ],
-  variables: ["$mac","$model", ...]
-}
-*/
