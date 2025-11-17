@@ -1,7 +1,10 @@
 <script lang="ts">
   import CodeEditor from "$lib/components/code-editor/code-editor.svelte";
   import CustomInput from "$lib/components/form-components/CustomInput.svelte";
-  import { Input } from "@jsbursik/magic-ui";
+  import { Input, toastStore } from "@jsbursik/magic-ui";
+  import { filename } from "$lib/form-validation";
+  import { IconX } from "@tabler/icons-svelte";
+  import "../config.css";
 
   let editorCount = $state(1);
   let editors = $state<string[]>([]);
@@ -36,11 +39,6 @@
     delete values[`${editor}-code`];
   }
 
-  function filename(v: string) {
-    const syntax = /^(\$?[\w.-]+\.\w+|\$\w+)$/;
-    return syntax.test(v);
-  }
-
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
@@ -63,8 +61,10 @@
     if (!response.ok) {
       const result = await response.json();
       errors = result.errors || {};
+      toastStore.show(`Error: ${errors}`, "danger");
     } else {
       window.location.href = "/phones/add-config";
+      toastStore.show("Phone config added!", "success");
     }
   }
 </script>
@@ -99,7 +99,9 @@
 
         {#each editors as editor (editor)}
           <fieldset class="stack">
-            <button class="close" onclick={(e) => removeFile(e, editor)}>&times;</button>
+            <button class="close" onclick={(e) => removeFile(e, editor)}>
+              <IconX size={16} />
+            </button>
             <legend>Additional File</legend>
             <div>
               <label for={editor}>File Name</label>
@@ -142,35 +144,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  fieldset:has(> button.close) {
-    position: relative;
-  }
-  button.close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 9999;
-    padding: 0.5rem;
-    margin: 0;
-    background: unset;
-    color: color-mix(in srgb, var(--color-danger), 20% black);
-    font-size: 1.4rem;
-    &:hover {
-      color: var(--color-danger);
-      box-shadow: unset;
-    }
-  }
-  .floating-container {
-    position: sticky;
-    top: 0;
-    padding: 0 1rem;
-    max-width: fit-content;
-  }
-
-  .three-col {
-    justify-self: center;
-    grid-template-columns: 30rem 60rem 30rem;
-  }
-</style>
