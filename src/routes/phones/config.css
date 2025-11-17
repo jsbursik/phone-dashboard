@@ -1,0 +1,37 @@
+fieldset:has(> button.close) {
+  position: relative;
+}
+button.close {
+  position: absolute;
+  top: 1rem;
+  right: 0.25rem;
+  z-index: 9999;
+
+  display: grid;
+  place-items: center;
+
+  height: 2rem + 1px;
+  width: 2rem + 1px;
+  padding: 0.5rem;
+  margin: 0;
+  border: none;
+  border-radius: 100%;
+  background: unset;
+  color: color-mix(in srgb, var(--color-danger), 20% black);
+
+  &:hover {
+    color: var(--color-danger);
+    box-shadow: unset;
+  }
+}
+.floating-container {
+  position: sticky;
+  top: 0;
+  padding: 0 1rem;
+  max-width: fit-content;
+}
+
+.three-col {
+  justify-self: center;
+  grid-template-columns: 30rem 60rem 30rem;
+}
