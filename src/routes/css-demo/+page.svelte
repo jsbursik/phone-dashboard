@@ -99,6 +99,7 @@ function hello() {
     <h2>Buttons</h2>
 
     <button>Default</button>
+    <button class="btn-primary">Primary</button>
     <button class="btn-success">Success</button>
     <button class="btn-warning">Warning</button>
     <button class="btn-danger">Danger</button>
@@ -110,11 +111,11 @@ function hello() {
 
   <section>
     <h2>Toasts</h2>
-    <button onclick={() => toastStore.show("Info!", "info")}>Info</button>
+    <button onclick={() => toastStore.show("Info!", "info")} class="btn-primary">Info</button>
     <button onclick={() => toastStore.show("Success!", "success")} class="btn-success">Success</button>
     <button onclick={() => toastStore.show("Warning!", "warning")} class="btn-warning">Warning</button>
     <button onclick={() => toastStore.show("Danger!", "danger")} class="btn-danger">Danger</button>
-    <button onclick={() => toastStore.show("Long delay", "info", 100000)}>Long Delay</button>
+    <button onclick={() => toastStore.show("Long delay", "info", 100000)} class="btn-primary">Long Delay</button>
   </section>
 
   <hr />
