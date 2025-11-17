@@ -14,10 +14,11 @@
 // Import and re-export Magic UI's Better-Auth schema
 export * from "@jsbursik/magic-ui/server";
 import type { AdditionalFiles } from "$lib/types";
-import { pgTable, text, json } from "drizzle-orm/pg-core";
+import { pgTable, text, json, serial } from "drizzle-orm/pg-core";
 
 export const phoneConfigs = pgTable("phone_configs", {
-  phone_model: text("phone-model").primaryKey(),
+  id: serial("id").primaryKey(),
+  phone_model: text("phone-model").unique().notNull(),
   phone_cfg_filename: text("phone-cfg-filename").notNull(),
   phone_cfg: text("phone-cfg").notNull(),
   additional_files: json("additional_files").$type<AdditionalFiles[]>().notNull().default([]),
