@@ -4,6 +4,7 @@ export interface AdditionalFiles {
 }
 
 export interface PhoneConfigSchema {
+  id?: number;
   phone_model: string;
   phone_cfg_filename: string;
   phone_cfg: string;
