@@ -37,6 +37,7 @@
   <NavbarContent>
     <NavLink href="/">Home</NavLink>
     <NavLink href="/css-demo">CSS Demo</NavLink>
+    <NavLink href="/phones">Phones</NavLink>
     <NavbarDropdown
       name="Phone Config"
       menuItems={[
