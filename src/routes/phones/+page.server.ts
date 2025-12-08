@@ -1,9 +1,11 @@
 import type { PageServerLoad } from "./$types";
 import { db } from "$lib/server/db";
-import { phoneConfigs } from "$lib/db/schema";
+import { phones } from "$lib/db/schema";
 
 export const load: PageServerLoad = async () => {
+  const allPhones = await db.select().from(phones);
+
   return {
-    phones: {},
+    phones: allPhones,
   };
 };

@@ -2,7 +2,7 @@
   import CodeEditor from "$lib/components/code-editor/code-editor.svelte";
   import CustomInput from "$lib/components/form-components/CustomInput.svelte";
   import { Input, toastStore } from "@jsbursik/magic-ui";
-  import { filename } from "$lib/form-validation";
+  import { filename, validateModelSpecificFile } from "$lib/form-validation";
   import { IconX } from "@tabler/icons-svelte";
   import "../config.css";
 
@@ -13,6 +13,10 @@
     "phone-cfg": "",
     "phone-cfg-filename": "",
   });
+
+  let mainCfgIsModelSpecific = $state(false);
+  let editorFlags = $state<Record<string, { isModelSpecific: boolean; isBinary: boolean }>>({});
+  let binaryFiles = $state<Record<string, File | null>>({});
 
   let errors = $state<Record<string, string>>({});
 
@@ -28,6 +32,8 @@
     // Initialize values for the new editor BEFORE adding it
     values[`${editorId}-id`] = "";
     values[`${editorId}-code`] = "";
+    editorFlags[editorId] = { isModelSpecific: false, isBinary: false };
+    binaryFiles[editorId] = null;
     editors.push(editorId);
   }
 
@@ -37,6 +43,22 @@
     // Clean up values for removed editor
     delete values[`${editor}-id`];
     delete values[`${editor}-code`];
+    delete editorFlags[editor];
+    delete binaryFiles[editor];
+  }
+
+  function handleBinaryUpload(editorId: string, e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      binaryFiles[editorId] = input.files[0];
+      values[`${editorId}-id`] = input.files[0].name;
+      // Read file as base64 for storage
+      const reader = new FileReader();
+      reader.onload = () => {
+        values[`${editorId}-code`] = reader.result as string;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
   async function handleSubmit(e: SubmitEvent) {
@@ -48,6 +70,29 @@
       return;
     }
 
+    // Validate model-specific files
+    const mainError = validateModelSpecificFile(
+      values["phone-cfg-filename"],
+      values["phone-cfg"],
+      mainCfgIsModelSpecific
+    );
+    if (mainError) {
+      toastStore.show(mainError, "danger");
+      return;
+    }
+
+    for (const editor of editors) {
+      const editorError = validateModelSpecificFile(
+        values[`${editor}-id`],
+        values[`${editor}-code`],
+        editorFlags[editor]?.isModelSpecific || false
+      );
+      if (editorError) {
+        toastStore.show(editorError, "danger");
+        return;
+      }
+    }
+
     const response = await fetch("/api/phone-config", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,6 +100,8 @@
         values,
         editors,
         variables,
+        mainCfgIsModelSpecific,
+        editorFlags,
       }),
     });
 
@@ -92,6 +139,12 @@
             />
           </div>
           <div>
+            <label>
+              <input type="checkbox" bind:checked={mainCfgIsModelSpecific} />
+              Model-Specific (no variables)
+            </label>
+          </div>
+          <div>
             <label for="phone-cfg">Phone Config</label>
             <CodeEditor id="phone-cfg" bind:value={values["phone-cfg"]} />
           </div>
@@ -112,13 +165,51 @@
                 placeholder="$model.boot"
                 bind:value={values[`${editor}-id`]}
                 validator={filename}
-                required
+                required={!editorFlags[editor]?.isBinary}
               />
             </div>
             <div>
-              <label for={`${editor}-code`}>File Code</label>
-              <CodeEditor id={`${editor}-code`} bind:value={values[`${editor}-code`]} />
+              <label>
+                <input type="checkbox" bind:checked={editorFlags[editor].isModelSpecific} />
+                Model-Specific (no variables)
+              </label>
             </div>
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  bind:checked={editorFlags[editor].isBinary}
+                  onchange={() => {
+                    if (!editorFlags[editor].isBinary) {
+                      values[`${editor}-code`] = "";
+                      binaryFiles[editor] = null;
+                    }
+                  }}
+                />
+                Binary File
+              </label>
+            </div>
+            {#if editorFlags[editor]?.isBinary}
+              <div>
+                <label for={`${editor}-file`}>Upload Binary</label>
+                <input
+                  type="file"
+                  id={`${editor}-file`}
+                  onchange={(e) => handleBinaryUpload(editor, e)}
+                  required
+                />
+                {#if binaryFiles[editor]}
+                  <p style="color: var(--color-success, green); font-size: 0.9em;">
+                    {binaryFiles[editor]?.name} ({(binaryFiles[editor]?.size ?? 0 / 1024).toFixed(2)} KB)
+                  </p>
+                {/if}
+              </div>
+            {:else}
+              <div>
+                <label for={`${editor}-code`}>File Code</label>
+                <CodeEditor id={`${editor}-code`} bind:value={values[`${editor}-code`]} />
+              </div>
+            {/if}
           </fieldset>
         {/each}
 

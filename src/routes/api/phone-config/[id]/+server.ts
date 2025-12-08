@@ -40,6 +40,7 @@ export const PUT: RequestHandler = async ({ params, request }) => {
       phone_model: updates["phone-model"], // ← Transform the keys
       phone_cfg_filename: updates["phone-cfg-filename"],
       phone_cfg: updates["phone-cfg"],
+      phone_cfg_is_model_specific: updates.phone_cfg_is_model_specific || false,
       additional_files: updates.additional_files || [],
       variables: updates.variables || [],
     })

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { AdditionalFiles, PhoneConfigSchema } from "$lib/types";
   import { Input, toastStore } from "@jsbursik/magic-ui";
-  import { filename } from "$lib/form-validation";
+  import { filename, validateModelSpecificFile } from "$lib/form-validation";
   import CodeEditor from "$lib/components/code-editor/code-editor.svelte";
   import { IconX } from "@tabler/icons-svelte";
   import "../config.css";
@@ -16,6 +16,8 @@
 
   let editValues = $state<Record<string, string> | null>();
   let editFiles = $state<Array<AdditionalFiles>>([]);
+  let mainCfgIsModelSpecific = $state(false);
+  let binaryFiles = $state<Record<number, File | null>>({});
 
   async function handleModelSelect(id: number, model: string) {
     selectedModel = model;
@@ -29,16 +31,38 @@
         "phone-cfg-filename": phone_cfg.phone_cfg_filename,
         "phone-cfg": phone_cfg.phone_cfg,
       };
+      mainCfgIsModelSpecific = phone_cfg.phone_cfg_is_model_specific || false;
       editFiles = [...phone_cfg.additional_files];
+      binaryFiles = {};
     }
   }
 
   function addFile() {
-    editFiles.push({ filename: "", content: "" });
+    editFiles.push({
+      filename: "",
+      content: "",
+      is_model_specific: false,
+      is_binary: false,
+    });
   }
 
   function removeFile(index: number) {
     editFiles = editFiles.filter((_, i) => i !== index);
+    delete binaryFiles[index];
+  }
+
+  function handleBinaryUpload(index: number, e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      binaryFiles[index] = input.files[0];
+      editFiles[index].filename = input.files[0].name;
+      // Read file as base64 for storage
+      const reader = new FileReader();
+      reader.onload = () => {
+        editFiles[index].content = reader.result as string;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
   async function handleSubmit(e: SubmitEvent) {
@@ -50,13 +74,37 @@
       return;
     }
 
+    // Validate model-specific files
+    const mainError = validateModelSpecificFile(
+      editValues!["phone-cfg-filename"],
+      editValues!["phone-cfg"],
+      mainCfgIsModelSpecific
+    );
+    if (mainError) {
+      toastStore.show(mainError, "danger");
+      return;
+    }
+
+    for (const file of editFiles) {
+      const fileError = validateModelSpecificFile(file.filename, file.content, file.is_model_specific);
+      if (fileError) {
+        toastStore.show(fileError, "danger");
+        return;
+      }
+    }
+
     const response = await fetch(`/api/phone-config/${phone_cfg!.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ id: phone_cfg!.id, ...editValues, ...editFiles }),
+      body: JSON.stringify({
+        id: phone_cfg!.id,
+        ...editValues,
+        phone_cfg_is_model_specific: mainCfgIsModelSpecific,
+        additional_files: editFiles,
+      }),
     });
 
     if (!response.ok) {
@@ -123,6 +171,12 @@
               />
             </div>
             <div>
+              <label>
+                <input type="checkbox" bind:checked={mainCfgIsModelSpecific} />
+                Model-Specific (no variables)
+              </label>
+            </div>
+            <div>
               <label for="phone-cfg">Phone Config</label>
               <CodeEditor id="phone-cfg" bind:value={editValues["phone-cfg"]} />
             </div>
@@ -141,13 +195,46 @@
                   placeholder="$model.boot"
                   bind:value={file.filename}
                   validator={filename}
-                  required
+                  required={!file.is_binary}
                 />
               </div>
               <div>
-                <label for={`file-${i}-content`}>File Content</label>
-                <CodeEditor id={`file-${i}-content`} bind:value={file.content} />
+                <label>
+                  <input type="checkbox" bind:checked={file.is_model_specific} />
+                  Model-Specific (no variables)
+                </label>
               </div>
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                    bind:checked={file.is_binary}
+                    onchange={() => {
+                      if (!file.is_binary) {
+                        file.content = "";
+                        binaryFiles[i] = null;
+                      }
+                    }}
+                  />
+                  Binary File
+                </label>
+              </div>
+              {#if file.is_binary}
+                <div>
+                  <label for={`file-${i}-upload`}>Upload Binary</label>
+                  <input type="file" id={`file-${i}-upload`} onchange={(e) => handleBinaryUpload(i, e)} />
+                  {#if binaryFiles[i]}
+                    <p style="color: var(--color-success, green); font-size: 0.9em;">
+                      {binaryFiles[i]?.name} ({((binaryFiles[i]?.size ?? 0) / 1024).toFixed(2)} KB)
+                    </p>
+                  {/if}
+                </div>
+              {:else}
+                <div>
+                  <label for={`file-${i}-content`}>File Content</label>
+                  <CodeEditor id={`file-${i}-content`} bind:value={file.content} />
+                </div>
+              {/if}
             </fieldset>
           {/each}
           <div style="display: flex; width: 100%">
